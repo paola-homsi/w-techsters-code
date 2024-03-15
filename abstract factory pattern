@@ -1,0 +1,52 @@
+// Using classes under the Abstract factory pattern for Creational Design Pattern Type
+// I will be creating some fashion objects that share similar properties.
+
+class Clothes {
+  constructor() {
+    this.name = "clothes";
+    this.designer = "Tommy Hilfiger";
+    this.country = "America";
+  }
+  toWear = () => console.log("On my body");
+}
+class Wristwatch {
+  constructor() {
+    this.name = "wristwatch";
+    this.designer = "Rolex";
+    this.country = "France";
+  }
+  toWear = () => console.log("On my wrist");
+}
+
+class Bags {
+  constructor() {
+    this.name = "bags";
+    this.designer = "Louis Vuitton";
+    this.country = "Indian";
+  }
+  toWear = () => console.log("Sling on my shoulders");
+}
+
+// Now i want to add an abstraction that will work as a single point of instance or interaction given any parameter it receives.
+
+const fashionFactory = {
+  buildFashion: function (type) {
+    switch (type) {
+      case "clothes":
+        return new Clothes();
+      case "wristwatch":
+        return new Wristwatch();
+      case "bags":
+        return new Bags();
+      default:
+        return null;
+    }
+  },
+};
+
+const clothes = fashionFactory.buildFashion("clothes");
+console.log(clothes);
+const wristwatch = fashionFactory.buildFashion("wristwatch");
+console.log(wristwatch);
+const bags = fashionFactory.buildFashion("bags");
+console.log(bags);
