@@ -20,3 +20,55 @@ exports.create = (req, res) => {
         );
     });
 };
+
+
+exports.getById = (req, res) => {
+  InstructorModel.findOne({ _id: req.params.instructorId })
+    .then((instructor) => {
+      if (!instructor) {
+        return res.status(404).send(
+          jsend(404, {
+            message: "Instructor not found!",
+          })
+        );
+      }
+
+      res.status(200).send(
+        jsend(200, {
+          instructor,
+        })
+      );
+    })
+    .catch((err) => {
+      res.status(404).send(
+        jsend(404, {
+          message: "Instructor not found!",
+        })
+      );
+    });
+};
+
+
+instructorModel.findOneAndUpdate({ _id: req.params.instructorId }, req.body)
+    .then((instructor) => {
+      if (!instructor) {
+        return res.status(404).send(
+          jsend(404, {
+            message: "instructor not found!",
+          })
+        );
+      }
+
+      res.status(200).send(
+        jsend(200, {
+          instructor,
+        })
+      );
+    })
+    .catch((err) => {
+      res.status(404).send(
+        jsend(404, {
+          message: "instructor not found!",
+        })
+      );
+    });
