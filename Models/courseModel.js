@@ -1,76 +1,53 @@
-// const mongoose = require("mongoose");
+//import mongoose from "mongoose";
+const mongoose = require("mongoose")
+const courseSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
 
-// const courseSchema = new mongoose.Schema({
-//   title: {
-//     type: String,
-//     required: true,
-//   },
-//   category: {
-//     type: String,
-//     required: true,
-//   },
-//   level: {
-//     type: String,
-//     required: true,
-//     enum: ["beginner", "intermediate", "advanced"],
-//   },
-//   description: {
-//     type: String,
-//     required: true,
-//   },
-//   image: String,
-//   courseType: {
-//     type: String,
-//     required: true,
-//     enum: ["video", "audio", "document"],
-//   },
-//   hour: {
-//     type: String, // Store price as a string
-//     required: true
-//   },
-//   price: {
-//     type: String, // Store price as a string
-//     required: true
-//   },
-//   courseContent: String,
+  description: {
+    type: String,
+    required: true,
+  },
+  instructor: {
+    type: String,
+    required: true
+  },
+  level: {
+    type: String,
+    enum: ['Beginner', 'Intermediate', 'Advanced'],
+    required: true
+  },
+  duration: {
+    type: Number,
+    required: true // Duration in hours
+  },
 
-//   whatIsIncluded: {
-//     type: [String],
-//     default: [],
-//   },
-//   curriculum: [
-//     {
-//       courseName: {
-//         type: String,
-//         required: true,
-//       },
-//       description: {
-//         type: String,
-//         required: true,
-//       },
-//     },
-//   ],
-//   requirement: [
-//     {
-//       name: String,
-//     },
-//   ],
-//   totalNumberOfEnrolledStudent: {
-//     type: Number,
-//     default: 0
-//   },
-//   status: {
-//     type: String,
-//     enum: ["pending", "live", "reject", "approved"],
-//     default: "pending",
+  prerequisites: {
+    type: [String],
+    default: []
+  },
+  topics: {
+    type: [String],
+    required: true
+  },
 
-//   },
+  students: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'Student'
+  },
+  Agent: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Instructors",
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
 
-//   Agent: {
-//     type: mongoose.Schema.Types.ObjectId,
-//     ref: "Instructors",
-//     required: true,
-//   },
-//   //createdAt: { type: Date, default: Date.now },
-// });
-// module.exports = mongoose.model("Course", courseSchema);
+
+  //createdAt: { type: Date, default: Date.now },
+});
+module.exports = mongoose.model("Course", courseSchema);
