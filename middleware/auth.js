@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken"
 import asyncHandler from "./async";
 import ErrorResponse from "../utils/errorResponse";
-import User from "../model/User";
+import User from "../models/User";
 
 
 // Protect routes
