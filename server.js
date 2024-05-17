@@ -4,12 +4,17 @@ import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import rateLimit from 'express-rate-limit';
 import mongoSanitize from 'express-mongo-sanitize';
+import { db } from './config/db.js';
+
+
+
+
 
 
 dotenv.config();
 
 const app = express();
-
+db()
 app.use(helmet());
 
 const limiter = rateLimit({
@@ -27,7 +32,7 @@ app.use(cookieParser());
 
 app.use(mongoSanitize());
 
-
+app.use("/api/v1", require("./routes/courseRoutes.js"))
 
 const port = process.env.PORT || 5000;
 
